@@ -4,7 +4,14 @@ function eval() {
 }
 
 function expressionCalculator(expr) {
-    // write your solution here
+    const exprArr = expr.split('');
+    const divisionZero = '/ 0';
+    if (expr.includes(divisionZero)) {
+        throw new 'TypeError: Division by zero.'
+    } else {
+    return (new Function('return ' + expr))()
+    }
+
 }
 
 module.exports = {
