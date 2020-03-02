@@ -9,25 +9,23 @@ function expressionCalculator(expr) {
     const closingSymbols = [')', ']', '}', '>'];
     const stack = [];
     let result;
-    for (let bracket of expr) { 
-        //let countBrackets = 0;
+    for (let bracket of expr) {
         if (openingSymbols.includes(bracket)) {
-           // countBrackets += 1;
             stack.push(bracket);
-         //console.log('push', bracket);
         }
     };
-
+    let errBracket;
     for (let bracket of expr) {
-        if (closingSymbols.includes(bracket)) {
-            stack.pop()
-            console.log('push', bracket);
-            //console.log('pop', bracket);
+        if (closingSymbols.includes(bracket) && stack < 1) {
+            errBracket = true;
         } 
+        if (closingSymbols.includes(bracket) && stack !== 0) {
+            stack.pop()
+        } 
+        
     };
-    console.log(stack, stack.length);
     result = stack.length === 0 ? true : false;
-    if (!result) {
+    if (!result || errBracket) {
         throw new 'ExpressionError: Brackets must be paired';
     };
     const divisionZero = '/ 0';
